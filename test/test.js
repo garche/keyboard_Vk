@@ -8,18 +8,22 @@ const vk = new VK({
     apiVersions: "5.50",
 });
 
+let chek = true;
+
 vk.updates.on('message', async function firstMassage(message)
 {
     if (message.isOutbox)
         return;
     else if(message.text == 'start' || message.text == '/start')
     {
+        chek = false;
         return message.send({
-            message: "Ты пидор",
+            message: "Вы убитуриент?",
             keyboard: kb1
+
         });
     }
-    else 
+    else if(chek)
         return message.send("Напиши start");
 });
 
@@ -30,19 +34,22 @@ vk.updates.on('message', async function firstMassage(message)
 
 const kb1 = Keyboard.builder()
     .textButton({
-        label: "Нет ты пидор",
+        label: "Да, я поступаю",
         payload: {
             command: 'bad'
         },
-        color: Keyboard.NEGATIVE_COLOR
+        color: Keyboard.POSITIVE_COLOR
     })
+    .row()
     .textButton({
-        label: "Да я пидорас",
+        label: "Нет, я студент",
         payload: {
             command: 'good'
         },
         color: Keyboard.POSITIVE_COLOR
 }).oneTime();
+
+
 
 //const sManager = new SessionManager();
 /**
